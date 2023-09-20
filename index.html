@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <link rel="stylesheet" href="demo4.css">
+</head>
+<body>
+    <script>
+        let counter = 0;
+        const updatelist = () => {
+            let list = document.getElementById("lista");
+            let data = document.getElementById("todo").value;
+            let li = document.createElement("li");
+            li.innerText = data;
+            li.setAttribute("id", counter);
+            counter++;
+            li.setAttribute("onclick","overline(this.id);")
+            list.appendChild(li);
+        }
+        const resetlist = () => {
+            document.getElementById("lista").innerHTML = "";
+            counter = 0;
+        }
+        const removelast = () => {
+            counter--;
+            let list = document.getElementById("lista");
+            list.removeChild(list.lastElementChild)
+        }
+        const overline = (liID) => {
+            if (document.getElementById(liID).style.textDecoration != "line-through"){
+                console.log(liID);
+                document.getElementById(liID).style.textDecoration = "line-through";
+            } else {
+                let list = document.getElementById("lista");
+                list.removeChild(document.getElementById(liID))
+            }
+        }
+    </script>
+    <h1>To-do list</h1>
+    <h2>Insert the things you want to the list below!</h2>
+    <div class="lomake">
+        <form>
+            <label for="todo">Syötä asia, jonka haluat muistaa</label>
+            <input id="todo" name="todo" type="text" style="width: 200px">
+            <input type="button" onclick="updatelist()" value="Add to list" style="width: 100px;">
+            <input type="button" onclick="removelast()" value="Remove last" style="width: 150px; margin-top: 30px;">
+            <input type="button" onclick="resetlist()" value="Reset list" style="width: 100px; margin-top: 30px; margin-bottom: 30px;">
+        </form>
+    </div>
+    <ul id="lista"></ul>
+</body>
+</html>
